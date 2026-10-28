@@ -1,37 +1,9 @@
 # Habitly — Mindful Habit Tracker
 
-### 1. GitHub Repository
-- **Repository Link:** [https://github.com/J-Sanjayram/Habitly](https://github.com/J-Sanjayram/Habitly)
-
 ---
 
-### 2. Live Demo
-- **Live Demo Link:** [https://habitly-app.vercel.app](https://habitly-app.vercel.app) *(or your deployed Vercel / Netlify URL)*
-
----
-
-### 3. Quickstart & Project Documentation
-
-#### Setup Steps
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/J-Sanjayram/Habitly.git
-cd Habitly
-
-# 2. Install dependencies
-npm install
-
-# 3. Start local development server
-npm run dev
-# Local server running at: http://localhost:5173
-
-# 4. Build for production
-npm run build
-
-# 5. Preview production build locally
-npm run preview
-```
+#### Live Demo
+- **Live Demo Link:** [Habitly live test]( https://habitlytrack.netlify.app/)
 
 ---
 
@@ -54,4 +26,8 @@ npm run preview
 
 #### What UX Problem Did You Notice and Fix?
 
-> Most habit tracking apps overwhelm users with steep setup friction, punitive streak resets, and mouse-heavy micro-interactions. In Habitly, I eliminated this fatigue by introducing instant 1-click optimistic completion paired with a 5-second non-blocking "Undo" notification to safely reverse accidental clicks. Additionally, I resolved desktop navigation collision between nav links and auth buttons, and architected a full keyboard-first workflow (`← → ↑ ↓` navigation, `Space`/`Enter` checkoff, `Ctrl+K` search, and `?` guide) so users can master their habits with zero friction.
+ - Implemented one-click habit completion with a 5-second Undo option.
+- Fixed desktop navigation conflicts between nav links and auth buttons.
+- Made the UI responsive across mobile, tablet, and desktop.
+- Faced challenges with keyboard configuration and focus management, which I solved using AI assistance.
+- Implemented keyboard shortcuts for navigation, habit completion, search, and help.
