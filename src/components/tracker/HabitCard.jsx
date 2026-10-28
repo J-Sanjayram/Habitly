@@ -21,54 +21,12 @@ export const HabitCard = ({ habit, onToggleComplete, onDelete, index = 0, totalC
     }
   };
 
-  const handleCardKeyDown = (e) => {
-    const isTargetCard = e.target.tagName === 'ARTICLE';
-
-    // Arrow Down -> Navigate to next habit card
-    if (e.key === 'ArrowDown' && isTargetCard) {
-      if (index < totalCount - 1) {
-        e.preventDefault();
-        document.getElementById(`habit-card-${index + 1}`)?.focus();
-      }
-    }
-    // Arrow Up -> Navigate to previous habit card or Add Habit button
-    else if (e.key === 'ArrowUp' && isTargetCard) {
-      e.preventDefault();
-      if (index > 0) {
-        document.getElementById(`habit-card-${index - 1}`)?.focus();
-      } else {
-        document.getElementById('tracker-add-habit-btn')?.focus();
-      }
-    }
-    // Arrow Right on card -> focus into its toggle button
-    else if (e.key === 'ArrowRight' && isTargetCard) {
-      e.preventDefault();
-      document.getElementById(`habit-toggle-${habit.id}`)?.focus();
-    }
-    // Arrow Left on card -> focus into its delete button
-    else if (e.key === 'ArrowLeft' && isTargetCard) {
-      e.preventDefault();
-      document.getElementById(`habit-delete-${habit.id}`)?.focus();
-    }
-    // Space or Enter on card -> Toggle complete
-    else if ((e.key === ' ' || e.key === 'Enter') && isTargetCard) {
-      e.preventDefault();
-      handleToggle();
-    }
-    // Delete key on card -> Delete habit
-    else if (e.key === 'Delete' && isTargetCard) {
-      e.preventDefault();
-      onDelete(habit.id);
-    }
-  };
-
   return (
     <article
       id={`habit-card-${index}`}
-      tabIndex={0}
-      onKeyDown={handleCardKeyDown}
-      aria-label={`Habit: ${habit.title}. Press Space or Enter to toggle complete. Use Arrow keys to navigate between habits.`}
-      className={`group relative rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950 ${
+      tabIndex={-1}
+      aria-label={`Habit: ${habit.title}.`}
+      className={`group relative rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between ${
         habit.completedToday
           ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800/80 shadow-xs'
           : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-sm'

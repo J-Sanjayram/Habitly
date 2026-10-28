@@ -280,10 +280,10 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
         return rect.width > 0 && rect.height > 0;
       };
 
-      // Collect all focusable controls across Header, Tracker Content, and Footer
+      // Collect all focusable buttons and links across Header, Tracker Content, and Footer
       const focusable = Array.from(
         document.querySelectorAll(
-          'button:not([disabled]):not([tabindex="-1"]), a[href]:not([disabled]):not([tabindex="-1"]), article[id^="habit-card-"]'
+          'button:not([disabled]):not([tabindex="-1"]), a[href]:not([disabled]):not([tabindex="-1"])'
         )
       ).filter(isVisible);
 
@@ -295,63 +295,7 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
       const currentIndex = focusable.indexOf(activeEl);
 
       if (currentIndex !== -1) {
-        // Fast shortcut: When focused on a habit's "Mark Done" / "Done Today" button
-        if (activeEl?.id?.startsWith('habit-toggle-')) {
-          const currentHabitId = activeEl.id.replace('habit-toggle-', '');
-          const allToggles = focusable.filter((el) => el.id?.startsWith('habit-toggle-'));
-          const toggleIndex = allToggles.indexOf(activeEl);
-
-          if (e.key === 'ArrowDown' && allToggles.length > 1) {
-            e.preventDefault();
-            const nextToggle = allToggles[(toggleIndex + 1) % allToggles.length];
-            nextToggle?.focus();
-            nextToggle?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            return;
-          } else if (e.key === 'ArrowUp' && allToggles.length > 1) {
-            e.preventDefault();
-            const prevToggle = allToggles[(toggleIndex - 1 + allToggles.length) % allToggles.length];
-            prevToggle?.focus();
-            prevToggle?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            return;
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const deleteBtn = document.getElementById(`habit-delete-${currentHabitId}`);
-            if (deleteBtn) {
-              deleteBtn.focus();
-              return;
-            }
-          }
-        }
-
-        // Fast shortcut: When focused on a habit's Delete button
-        if (activeEl?.id?.startsWith('habit-delete-')) {
-          const currentHabitId = activeEl.id.replace('habit-delete-', '');
-          const allDeletes = focusable.filter((el) => el.id?.startsWith('habit-delete-'));
-          const delIndex = allDeletes.indexOf(activeEl);
-
-          if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            const toggleBtn = document.getElementById(`habit-toggle-${currentHabitId}`);
-            if (toggleBtn) {
-              toggleBtn.focus();
-              return;
-            }
-          } else if (e.key === 'ArrowDown' && allDeletes.length > 1) {
-            e.preventDefault();
-            const nextDel = allDeletes[(delIndex + 1) % allDeletes.length];
-            nextDel?.focus();
-            nextDel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            return;
-          } else if (e.key === 'ArrowUp' && allDeletes.length > 1) {
-            e.preventDefault();
-            const prevDel = allDeletes[(delIndex - 1 + allDeletes.length) % allDeletes.length];
-            prevDel?.focus();
-            prevDel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            return;
-          }
-        }
-
-        // Standard sequential cycling across all interactive buttons
+        // Continuous, sequential cycling across all buttons on the page (no traps/loops)
         e.preventDefault();
         let nextIndex;
         if (isForward) {

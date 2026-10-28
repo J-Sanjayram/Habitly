@@ -130,34 +130,6 @@ export const FilterControls = ({
                 aria-selected={isSelected}
                 tabIndex={0}
                 onClick={() => onCategoryChange(cat)}
-                onKeyDown={(e) => {
-                  if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    const nextIndex = (index + 1) % categories.length;
-                    onCategoryChange(categories[nextIndex]);
-                    document.getElementById(`category-tab-${categories[nextIndex].toLowerCase()}`)?.focus();
-                  } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    const prevIndex = (index - 1 + categories.length) % categories.length;
-                    onCategoryChange(categories[prevIndex]);
-                    document.getElementById(`category-tab-${categories[prevIndex].toLowerCase()}`)?.focus();
-                  } else if (e.key === 'Home') {
-                    e.preventDefault();
-                    onCategoryChange(categories[0]);
-                    document.getElementById(`category-tab-${categories[0].toLowerCase()}`)?.focus();
-                  } else if (e.key === 'End') {
-                    e.preventDefault();
-                    onCategoryChange(categories[categories.length - 1]);
-                    document.getElementById(`category-tab-${categories[categories.length - 1].toLowerCase()}`)?.focus();
-                  } else if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    const firstCard = document.getElementById('habit-card-0') || document.querySelector('[id^="status-filter-"]');
-                    firstCard?.focus();
-                  } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    document.getElementById('tracker-add-habit-btn')?.focus();
-                  }
-                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                   isSelected
                     ? 'bg-emerald-600 text-white shadow-xs'
