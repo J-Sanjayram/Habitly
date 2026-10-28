@@ -4,7 +4,7 @@ import { Features } from './Features';
 import { Testimonials } from './Testimonials';
 import { Pricing } from './Pricing';
 
-export const LandingPage = ({ onOpenTracker, onOpenAuth, isAuthenticated }) => {
+export const LandingPage = ({ onOpenTracker, onOpenAuth, onOpenTour }) => {
   // Arrow key navigation between all buttons & interactive elements on Landing Page
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -114,22 +114,12 @@ export const LandingPage = ({ onOpenTracker, onOpenAuth, isAuthenticated }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleGetStarted = () => {
-    if (isAuthenticated) {
-      onOpenTracker();
-    } else if (onOpenAuth) {
-      onOpenAuth('signup');
-    } else {
-      onOpenTracker();
-    }
-  };
-
   return (
-    <main className="w-full">
-      <Hero onGetStarted={handleGetStarted} onOpenTour={onOpenTour} />
+    <div className="w-full">
+      <Hero onGetStarted={onOpenTracker} onOpenTour={onOpenTour} />
       <Features />
       <Testimonials />
-      <Pricing onSelectPlan={handleGetStarted} />
-    </main>
+      <Pricing onSelectPlan={onOpenTracker} />
+    </div>
   );
 };

@@ -70,7 +70,19 @@ function HabitlyApp() {
 
   const handleViewChange = (view) => {
     setCurrentView(view);
-    window.location.hash = view === 'tracker' ? '#tracker' : '';
+    try {
+      if (view === 'tracker') {
+        window.location.hash = '#tracker';
+      } else {
+        if (window.location.hash && window.location.hash === '#tracker') {
+          history.pushState(null, '', window.location.pathname + window.location.search);
+        } else if (window.location.hash) {
+          window.location.hash = '';
+        }
+      }
+    } catch {
+      window.location.hash = view === 'tracker' ? '#tracker' : '';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -126,7 +138,7 @@ function HabitlyApp() {
     const handleHashChange = () => {
       if (window.location.hash === '#tracker') {
         setCurrentView('tracker');
-      } else if (window.location.hash === '' || window.location.hash === '#landing') {
+      } else {
         setCurrentView('landing');
       }
     };
