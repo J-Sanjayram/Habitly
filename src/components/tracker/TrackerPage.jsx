@@ -449,10 +449,16 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour, user, onOpenAuth }) =>
             Track daily rituals, build momentum, and master consistency.
           </p>
           <div className="mt-3 hidden md:flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400">
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-xs">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+            <button
+              type="button"
+              id="tracker-shortcuts-pill-btn"
+              onClick={onOpenTour}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/50 hover:shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 cursor-pointer group text-slate-600 dark:text-slate-300"
+              title="Click to view all shortcuts (Press ?)"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 group-hover:scale-105 transition-transform">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Keyboard Flow:
+                Power User Flow:
               </span>
               <span className="flex items-center gap-1.5">
                 <kbd className="px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">← → ↑ ↓</kbd>
@@ -468,7 +474,12 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour, user, onOpenAuth }) =>
                 <kbd className="px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">Ctrl+K</kbd>
                 <span>Search</span>
               </span>
-            </div>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 border border-emerald-300 dark:border-emerald-800 font-mono font-bold text-[11px] shadow-2xs">?</kbd>
+                <span>Guide</span>
+              </span>
+            </button>
           </div>
         </div>
       </div>

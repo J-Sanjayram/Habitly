@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Flame, CheckCircle, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export const Hero = ({ onGetStarted }) => {
+export const Hero = ({ onGetStarted, onOpenTour }) => {
   const [demoChecked, setDemoChecked] = useState(false);
 
   const handleDemoToggle = () => {
@@ -69,33 +69,39 @@ export const Hero = ({ onGetStarted }) => {
 
           {/* Keyboard shortcut power-user pill (Desktop Only) */}
           <div className="pt-2 hidden md:flex items-center justify-center">
-            <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-xs text-slate-500 dark:text-slate-400">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+            <button
+              id="hero-keyboard-pill-btn"
+              type="button"
+              onClick={onOpenTour}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full text-xs font-medium bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-emerald-500/50 hover:shadow-md transition-all text-slate-500 dark:text-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500 cursor-pointer group"
+              title="Click to view full Power User Guide (or press ?)"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 group-hover:scale-105 transition-transform">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Keyboard Ready
+                Power User Flow
               </span>
               <span className="text-slate-300 dark:text-slate-700">•</span>
               <span className="flex items-center gap-1.5">
                 <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
                   ← → ↑ ↓
                 </kbd>
-                <span>Navigate buttons</span>
+                <span>Navigate</span>
               </span>
               <span className="text-slate-300 dark:text-slate-700">•</span>
               <span className="flex items-center gap-1.5">
                 <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
                   ↵ Enter
                 </kbd>
-                <span>Open tracker</span>
+                <span>Select</span>
               </span>
               <span className="text-slate-300 dark:text-slate-700">•</span>
               <span className="flex items-center gap-1.5">
-                <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
-                  Shift + ↵
+                <kbd className="px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 border border-emerald-300 dark:border-emerald-800 font-mono font-bold text-[11px] text-emerald-700 dark:text-emerald-300 shadow-2xs">
+                  ?
                 </kbd>
-                <span>Sign in</span>
+                <span>Guide</span>
               </span>
-            </div>
+            </button>
           </div>
 
           {/* Social proof chips */}

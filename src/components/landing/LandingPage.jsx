@@ -126,7 +126,7 @@ export const LandingPage = ({ onOpenTracker, onOpenAuth, isAuthenticated }) => {
 
   return (
     <main className="w-full">
-      <Hero onGetStarted={handleGetStarted} />
+      <Hero onGetStarted={handleGetStarted} onOpenTour={onOpenTour} />
       <Features />
       <Testimonials />
       <Pricing onSelectPlan={handleGetStarted} />

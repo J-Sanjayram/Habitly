@@ -55,11 +55,16 @@ function HabitlyApp() {
 
   const handleSplashFinish = () => {
     setShowSplash(false);
-    // Automatically trigger keyboard tour after splash screen on desktop screens only (>= 768px)
-    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
-      setTimeout(() => {
-        setShowTour(true);
-      }, 150);
+    // Only auto-show tour ONCE for brand new desktop visitors (not on every refresh)
+    try {
+      const hasSeen = localStorage.getItem('habitly_guide_seen');
+      if (!hasSeen && typeof window !== 'undefined' && window.innerWidth >= 768) {
+        setTimeout(() => {
+          setShowTour(true);
+        }, 150);
+      }
+    } catch (e) {
+      console.warn(e);
     }
   };
 
@@ -81,9 +86,20 @@ function HabitlyApp() {
     handleViewChange('tracker');
   };
 
-  // Global Shortcuts: Shift + Enter for Auth, Enter for Tracker (when on landing)
+  // Global Shortcuts: Shift + Enter for Auth, Enter for Tracker, ? for Power User Guide
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
+      // ? (or Shift + /) to toggle the Power User Guide
+      if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+        const activeTag = document.activeElement?.tagName;
+        const isInput = ['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) || document.activeElement?.isContentEditable;
+        if (!isInput && !showAuth && !showSplash) {
+          e.preventDefault();
+          setShowTour((prev) => !prev);
+          return;
+        }
+      }
+
       // Shift + Enter: open Sign In / Sign Up
       if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault();
@@ -153,6 +169,7 @@ function HabitlyApp() {
         user={user}
         onViewChange={handleViewChange}
         onOpenAuth={handleOpenAuth}
+        onOpenTour={() => setShowTour(true)}
       />
 
       {/* Main Content Area */}
@@ -161,6 +178,7 @@ function HabitlyApp() {
           <LandingPage
             onOpenTracker={() => handleViewChange('tracker')}
             onOpenAuth={handleOpenAuth}
+            onOpenTour={() => setShowTour(true)}
             isAuthenticated={user?.isAuthenticated}
           />
         ) : (

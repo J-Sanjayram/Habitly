@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { Sparkles, Sun, Moon, Menu, X, ArrowRight, LayoutDashboard, Home, User } from 'lucide-react';
 
-export const Header = ({ currentView, onViewChange, onOpenAuth, user }) => {
+export const Header = ({ currentView, onViewChange, onOpenAuth, onOpenTour, user }) => {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -140,6 +140,22 @@ export const Header = ({ currentView, onViewChange, onOpenAuth, user }) => {
                 </button>
               </div>
             )
+          )}
+
+          {/* Power User Shortcuts Trigger */}
+          {onOpenTour && (
+            <button
+              id="nav-shortcuts-btn"
+              type="button"
+              onClick={onOpenTour}
+              className="p-1.5 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 shrink-0 group"
+              title="Power User Guide & Shortcuts (Press ?)"
+              aria-label="Open Keyboard Shortcuts Guide"
+            >
+              <kbd className="w-6 h-6 flex items-center justify-center font-mono text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 group-hover:border-emerald-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 shadow-2xs transition-colors">
+                ?
+              </kbd>
+            </button>
           )}
 
           {/* Dark Mode Toggle */}
