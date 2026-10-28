@@ -50,15 +50,29 @@ export const Hero = ({ onGetStarted }) => {
           {/* Call-to-action buttons */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <button
+              id="hero-cta-start"
               type="button"
               onClick={onGetStarted}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  document.getElementById('hero-cta-features')?.focus();
+                }
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-lg shadow-emerald-600/25 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
               <span>Start Tracking Free</span>
               <ArrowRight className="w-5 h-5" />
             </button>
             <a
+              id="hero-cta-features"
               href="#features"
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  document.getElementById('hero-cta-start')?.focus();
+                }
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 shadow-sm"
             >
               See How It Works

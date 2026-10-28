@@ -301,10 +301,12 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
               aria-label="Habits list"
               className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
-              {filteredHabits.map((habit) => (
+              {filteredHabits.map((habit, index) => (
                 <HabitCard
                   key={habit.id}
                   habit={habit}
+                  index={index}
+                  totalCount={filteredHabits.length}
                   onToggleComplete={handleToggleComplete}
                   onDelete={handleDeleteHabit}
                 />

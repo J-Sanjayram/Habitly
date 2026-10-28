@@ -121,6 +121,41 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
     if (onAuthSuccess) onAuthSuccess();
   };
 
+  const handleInputKeyDown = (e, currentField) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentField === 'name') {
+        document.getElementById('auth-email')?.focus();
+      } else if (currentField === 'email') {
+        document.getElementById('auth-password')?.focus();
+      } else if (currentField === 'password') {
+        handleSubmit(e);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (currentField === 'name') {
+        document.getElementById('auth-email')?.focus();
+      } else if (currentField === 'email') {
+        document.getElementById('auth-password')?.focus();
+      } else if (currentField === 'password') {
+        document.getElementById('auth-submit-btn')?.focus();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentField === 'password') {
+        document.getElementById('auth-email')?.focus();
+      } else if (currentField === 'email') {
+        if (mode === 'signup') {
+          document.getElementById('auth-name')?.focus();
+        } else {
+          document.getElementById('auth-tab-login')?.focus();
+        }
+      } else if (currentField === 'name') {
+        document.getElementById('auth-tab-signup')?.focus();
+      }
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -162,6 +197,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
         {/* Mode Switcher Tabs */}
         <div className="mt-5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center gap-1">
           <button
+            id="auth-tab-login"
             type="button"
             onClick={() => setMode('login')}
             className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
@@ -173,6 +209,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
             Sign In
           </button>
           <button
+            id="auth-tab-signup"
             type="button"
             onClick={() => setMode('signup')}
             className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
@@ -199,6 +236,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  onKeyDown={(e) => handleInputKeyDown(e, 'name')}
                   placeholder="e.g. Alex Morgan"
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500"
                 />
@@ -219,6 +257,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => handleInputKeyDown(e, 'email')}
                 placeholder="you@example.com"
                 className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500"
               />
@@ -237,6 +276,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => handleInputKeyDown(e, 'password')}
                 placeholder="••••••••"
                 className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500"
               />
@@ -246,6 +286,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
 
           <div className="pt-2 space-y-2.5">
             <button
+              id="auth-submit-btn"
               type="submit"
               className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-md shadow-emerald-600/20 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
@@ -254,6 +295,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
             </button>
 
             <button
+              id="auth-guest-btn"
               type="button"
               onClick={handleGuestLogin}
               className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
@@ -271,3 +313,4 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
     </div>
   );
 };
+

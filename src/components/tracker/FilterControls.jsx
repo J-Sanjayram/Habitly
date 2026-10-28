@@ -50,6 +50,14 @@ export const FilterControls = ({
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
                 onSearchChange('');
+              } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const firstCard = document.getElementById('habit-card-0');
+                if (firstCard) {
+                  firstCard.focus();
+                } else {
+                  document.querySelector('[role="tablist"] button')?.focus();
+                }
               }
             }}
             placeholder="Search habits... (Press Ctrl+K, Esc to clear)"
@@ -135,6 +143,12 @@ export const FilterControls = ({
                   } else if (e.key === 'End') {
                     e.preventDefault();
                     onCategoryChange(categories[categories.length - 1]);
+                  } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    document.getElementById('habit-card-0')?.focus();
+                  } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    document.getElementById('habit-search')?.focus();
                   }
                 }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${

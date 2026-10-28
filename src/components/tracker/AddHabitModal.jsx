@@ -58,6 +58,27 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
             }
           }
         }
+        // Arrow Key navigation across modal buttons
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+          const activeEl = document.activeElement;
+          const isButton = activeEl && activeEl.tagName === 'BUTTON';
+
+          if (isButton && modalRef.current) {
+            const allButtons = Array.from(modalRef.current.querySelectorAll('button:not([disabled])'));
+            const currentIndex = allButtons.indexOf(activeEl);
+
+            if (currentIndex !== -1) {
+              e.preventDefault();
+              let nextIndex;
+              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                nextIndex = (currentIndex + 1) % allButtons.length;
+              } else {
+                nextIndex = (currentIndex - 1 + allButtons.length) % allButtons.length;
+              }
+              allButtons[nextIndex]?.focus();
+            }
+          }
+        }
       };
 
       window.addEventListener('keydown', handleKeyDown);
@@ -124,6 +145,35 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
     onClose();
   };
 
+  const handleInputKeyDown = (e, currentField) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentField === 'title') {
+        document.getElementById('habit-category')?.focus();
+      } else if (currentField === 'category') {
+        document.getElementById('habit-target')?.focus();
+      } else if (currentField === 'target') {
+        handleSubmit(e);
+      }
+    } else if (e.key === 'ArrowDown') {
+      if (currentField === 'title') {
+        e.preventDefault();
+        document.getElementById('habit-category')?.focus();
+      } else if (currentField === 'target') {
+        e.preventDefault();
+        document.getElementById('add-habit-save-btn')?.focus();
+      }
+    } else if (e.key === 'ArrowUp') {
+      if (currentField === 'target') {
+        e.preventDefault();
+        document.getElementById('habit-category')?.focus();
+      } else if (currentField === 'category') {
+        e.preventDefault();
+        document.getElementById('habit-title')?.focus();
+      }
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -185,6 +235,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
               value={title}
               onChange={handleTitleChange}
               onBlur={() => handleBlur('title')}
+              onKeyDown={(e) => handleInputKeyDown(e, 'title')}
               placeholder="e.g., Read 20 pages, 10 min stretch..."
               aria-invalid={!!errors.title}
               aria-describedby={errors.title ? 'title-error' : undefined}
@@ -211,6 +262,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
               id="habit-category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              onKeyDown={(e) => handleInputKeyDown(e, 'category')}
               className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500 cursor-pointer"
             >
               {CATEGORIES.map((cat) => (
@@ -260,6 +312,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
               type="text"
               value={target}
               onChange={(e) => setTarget(e.target.value)}
+              onKeyDown={(e) => handleInputKeyDown(e, 'target')}
               placeholder="e.g., Right after brewing morning coffee"
               className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500 transition-colors"
             />
@@ -268,6 +321,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
           {/* Modal Actions */}
           <div className="pt-4 flex items-center justify-end gap-3">
             <button
+              id="add-habit-cancel-btn"
               type="button"
               onClick={onClose}
               className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
@@ -275,6 +329,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
               Cancel
             </button>
             <button
+              id="add-habit-save-btn"
               type="submit"
               className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-sm shadow-emerald-600/30 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
