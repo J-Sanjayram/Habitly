@@ -48,7 +48,19 @@ export const KeyboardTour = ({ isOpen, onClose, onOpenTracker }) => {
 
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
-              Check off habit / Toggle
+              Move between buttons &amp; cards
+            </span>
+            <div className="flex items-center gap-1 font-mono text-xs">
+              <kbd className="px-1.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">←</kbd>
+              <kbd className="px-1.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">→</kbd>
+              <kbd className="px-1.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">↑</kbd>
+              <kbd className="px-1.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">↓</kbd>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+              Check off habit / Open dashboard
             </span>
             <div className="flex items-center gap-1 font-mono text-xs">
               <kbd className="px-2 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">Space</kbd>

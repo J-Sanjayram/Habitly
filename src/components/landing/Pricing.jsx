@@ -72,9 +72,10 @@ export const Pricing = ({ onSelectPlan }) => {
           {/* Billing Switch */}
           <div className="mt-8 inline-flex items-center p-1 rounded-xl bg-slate-200/70 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
             <button
+              id="pricing-monthly-btn"
               type="button"
               onClick={() => setBillingCycle('monthly')}
-              className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+              className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40 ${
                 billingCycle === 'monthly'
                   ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -83,9 +84,10 @@ export const Pricing = ({ onSelectPlan }) => {
               Monthly Billing
             </button>
             <button
+              id="pricing-annual-btn"
               type="button"
               onClick={() => setBillingCycle('annual')}
-              className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+              className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40 ${
                 billingCycle === 'annual'
                   ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -164,9 +166,10 @@ export const Pricing = ({ onSelectPlan }) => {
 
                 <div className="mt-8 pt-4">
                   <button
+                    id={`pricing-plan-${idx}-btn`}
                     type="button"
                     onClick={onSelectPlan}
-                    className={`w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                    className={`w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40 ${
                       plan.popular
                         ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700'

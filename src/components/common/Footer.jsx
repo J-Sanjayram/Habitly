@@ -31,33 +31,37 @@ export const Footer = ({ onViewChange, onOpenTour }) => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <button
+                  id="footer-tracker-btn"
                   type="button"
                   onClick={() => onViewChange('tracker')}
-                  className="hover:text-emerald-400 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                  className="hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded px-1"
                 >
                   My Habits Tracker
                 </button>
               </li>
               <li>
                 <a
+                  id="footer-link-features"
                   href="#features"
-                  className="hover:text-emerald-400 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                  className="hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded px-1"
                 >
                   Features
                 </a>
               </li>
               <li>
                 <a
+                  id="footer-link-pricing"
                   href="#pricing"
-                  className="hover:text-emerald-400 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                  className="hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded px-1"
                 >
                   Pricing Plans
                 </a>
               </li>
               <li>
                 <a
+                  id="footer-link-testimonials"
                   href="#testimonials"
-                  className="hover:text-emerald-400 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                  className="hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded px-1"
                 >
                   User Stories
                 </a>
@@ -76,6 +80,9 @@ export const Footer = ({ onViewChange, onOpenTour }) => {
                 <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Tab</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Shift+Tab</kbd> Full navigation
               </li>
               <li>
+                <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">← → ↑ ↓</kbd> Arrow keys move buttons
+              </li>
+              <li>
                 <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Space</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Enter</kbd> Check habit
               </li>
               <li>
@@ -87,9 +94,10 @@ export const Footer = ({ onViewChange, onOpenTour }) => {
             </ul>
             {onOpenTour && (
               <button
+                id="footer-tour-btn"
                 type="button"
                 onClick={onOpenTour}
-                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded px-1"
               >
                 <span>Interactive Keyboard Tour →</span>
               </button>

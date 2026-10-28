@@ -36,17 +36,30 @@ function HabitlyApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Global Shortcut: Shift + Enter to open Sign In / Sign Up
+  // Global Shortcuts: Shift + Enter for Auth, Enter for Tracker (when on landing)
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
+      // Shift + Enter: open Sign In / Sign Up
       if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault();
         setShowAuth(true);
+        return;
+      }
+
+      // Enter on Landing Page: open Tracker dashboard if not inside interactive element or modal
+      if (e.key === 'Enter' && !e.shiftKey && currentView === 'landing') {
+        const activeTag = document.activeElement?.tagName;
+        const isInteractive = ['BUTTON', 'A', 'INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag);
+        const isModalOpen = document.querySelector('[role="dialog"]') || showAuth || showSplash || showTour;
+        if (!isInteractive && !isModalOpen) {
+          e.preventDefault();
+          handleViewChange('tracker');
+        }
       }
     };
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, []);
+  }, [currentView, showAuth, showSplash, showTour]);
 
   useEffect(() => {
     const handleHashChange = () => {
