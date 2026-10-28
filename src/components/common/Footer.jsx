@@ -108,7 +108,7 @@ export const Footer = ({ onViewChange, onOpenTour }) => {
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <p>© {new Date().getFullYear()} Habitly Technologies, Inc. Built for mindful habits.</p>
           <p className="flex items-center gap-1.5">
-            Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for purposeful users.
+            Crafted by <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> J Sanjayram for purposeful users.
           </p>
         </div>
       </div>
