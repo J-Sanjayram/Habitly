@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Keyboard, Check, ArrowRight, X, Sparkles, Search, Sliders, CornerDownLeft } from 'lucide-react';
 
-export const KeyboardTour = ({ isOpen, onClose }) => {
+export const KeyboardTour = ({ isOpen, onClose, onOpenTracker }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const modalRef = useRef(null);
   const primaryButtonRef = useRef(null);
@@ -143,8 +143,18 @@ export const KeyboardTour = ({ isOpen, onClose }) => {
   const handleNext = () => {
     if (isLastStep) {
       onClose();
+      if (onOpenTracker) {
+        onOpenTracker();
+      }
     } else {
       setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const handleDirectOpenTracker = () => {
+    onClose();
+    if (onOpenTracker) {
+      onOpenTracker();
     }
   };
 
@@ -220,20 +230,26 @@ export const KeyboardTour = ({ isOpen, onClose }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 rounded-xl transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
-            >
-              Skip
-            </button>
+            {!isLastStep && (
+              <button
+                type="button"
+                onClick={handleDirectOpenTracker}
+                className="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 rounded-xl transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+                title="Skip tour and open tracker dashboard"
+              >
+                Skip to Dashboard
+              </button>
+            )}
             <button
               ref={primaryButtonRef}
               type="button"
               onClick={handleNext}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-sm shadow-emerald-600/30 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-sm shadow-emerald-600/30 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
-              <span>{isLastStep ? "Start Tracking!" : "Next Tip"}</span>
+              <span>{isLastStep ? "Enter Tracker Dashboard" : "Next Tip"}</span>
+              <kbd className="inline-block px-1.5 py-0.5 text-[10px] rounded bg-emerald-700/90 text-white font-mono font-bold">
+                ↵ Enter
+              </kbd>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -242,3 +258,4 @@ export const KeyboardTour = ({ isOpen, onClose }) => {
     </div>
   );
 };
+

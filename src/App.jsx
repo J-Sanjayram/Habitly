@@ -52,7 +52,11 @@ function HabitlyApp() {
       {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
 
       {/* Interactive Keyboard Accessibility Tour Guide */}
-      <KeyboardTour isOpen={showTour} onClose={() => setShowTour(false)} />
+      <KeyboardTour
+        isOpen={showTour}
+        onClose={() => setShowTour(false)}
+        onOpenTracker={() => handleViewChange('tracker')}
+      />
 
       {/* Skip to Content Link for Accessibility */}
       <a
