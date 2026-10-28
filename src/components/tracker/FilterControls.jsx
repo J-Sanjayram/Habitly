@@ -47,7 +47,12 @@ export const FilterControls = ({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search habits... (Press Ctrl+K)"
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                onSearchChange('');
+              }
+            }}
+            placeholder="Search habits... (Press Ctrl+K, Esc to clear)"
             className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus-visible:ring-2 focus-visible:ring-emerald-500 shadow-xs transition-colors"
           />
           {searchQuery && (
@@ -106,14 +111,32 @@ export const FilterControls = ({
           aria-label="Filter by category"
           className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full"
         >
-          {categories.map((cat) => {
+          {categories.map((cat, index) => {
             const isSelected = selectedCategory === cat;
             return (
               <button
                 key={cat}
                 role="tab"
                 aria-selected={isSelected}
+                tabIndex={isSelected ? 0 : -1}
                 onClick={() => onCategoryChange(cat)}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const nextIndex = (index + 1) % categories.length;
+                    onCategoryChange(categories[nextIndex]);
+                  } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prevIndex = (index - 1 + categories.length) % categories.length;
+                    onCategoryChange(categories[prevIndex]);
+                  } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    onCategoryChange(categories[0]);
+                  } else if (e.key === 'End') {
+                    e.preventDefault();
+                    onCategoryChange(categories[categories.length - 1]);
+                  }
+                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                   isSelected
                     ? 'bg-emerald-600 text-white shadow-xs'

@@ -74,7 +74,7 @@ export const Pricing = ({ onSelectPlan }) => {
             <button
               type="button"
               onClick={() => setBillingCycle('monthly')}
-              className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+              className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                 billingCycle === 'monthly'
                   ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -85,7 +85,7 @@ export const Pricing = ({ onSelectPlan }) => {
             <button
               type="button"
               onClick={() => setBillingCycle('annual')}
-              className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+              className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                 billingCycle === 'annual'
                   ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'

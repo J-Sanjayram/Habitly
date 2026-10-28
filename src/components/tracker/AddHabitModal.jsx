@@ -14,7 +14,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
   const titleInputRef = useRef(null);
   const modalRef = useRef(null);
 
-  // Focus title input on open, and handle Escape key
+  // Focus title input on open, trap focus inside modal, and handle Escape key
   useEffect(() => {
     if (isOpen) {
       setTitle('');
@@ -23,6 +23,9 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
       setTarget('');
       setErrors({});
       setTouched({});
+
+      const previousActiveElement = document.activeElement;
+
       setTimeout(() => {
         titleInputRef.current?.focus();
       }, 50);
@@ -30,10 +33,40 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
       const handleKeyDown = (e) => {
         if (e.key === 'Escape') {
           onClose();
+          return;
+        }
+
+        // Trap focus inside modal
+        if (e.key === 'Tab' && modalRef.current) {
+          const focusableElements = modalRef.current.querySelectorAll(
+            'button, [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusableElements.length === 0) return;
+
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
         }
       };
+
       window.addEventListener('keydown', handleKeyDown);
-      return () => window.removeEventListener('keydown', handleKeyDown);
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+          previousActiveElement.focus();
+        }
+      };
     }
   }, [isOpen, onClose]);
 
@@ -197,7 +230,7 @@ export const AddHabitModal = ({ isOpen, onClose, onAddHabit }) => {
               {['Daily', 'Weekly'].map((freq) => (
                 <label
                   key={freq}
-                  className={`flex items-center justify-center py-2.5 px-4 rounded-xl border text-xs font-semibold cursor-pointer transition-all ${
+                  className={`flex items-center justify-center py-2.5 px-4 rounded-xl border text-xs font-semibold cursor-pointer transition-all focus-within:ring-2 focus-within:ring-emerald-500 ${
                     frequency === freq
                       ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 shadow-xs'
                       : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
