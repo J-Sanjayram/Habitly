@@ -24,10 +24,12 @@ function HabitlyApp() {
 
   const handleSplashFinish = () => {
     setShowSplash(false);
-    // Automatically trigger keyboard tour after splash screen
-    setTimeout(() => {
-      setShowTour(true);
-    }, 150);
+    // Automatically trigger keyboard tour after splash screen on desktop screens only (>= 768px)
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setTimeout(() => {
+        setShowTour(true);
+      }, 150);
+    }
   };
 
   const handleViewChange = (view) => {

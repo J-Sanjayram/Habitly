@@ -383,16 +383,27 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Track daily rituals, build momentum, and master consistency.
           </p>
-          <div className="mt-2.5 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-              <span className="font-mono font-bold text-slate-700 dark:text-slate-200">← → ↑ ↓</span> Arrow keys to move between buttons &amp; cards
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-              <kbd className="font-mono font-bold text-slate-700 dark:text-slate-200">Space / Enter</kbd> Check off habit
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-              <kbd className="font-mono font-bold text-slate-700 dark:text-slate-200">Ctrl+K</kbd> Search
-            </span>
+          <div className="mt-3 hidden md:flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Keyboard Flow:
+              </span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">← → ↑ ↓</kbd>
+                <span>Navigate</span>
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">Space / ↵</kbd>
+                <span>Check habit</span>
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">Ctrl+K</kbd>
+                <span>Search</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

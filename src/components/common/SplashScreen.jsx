@@ -110,7 +110,8 @@ export const SplashScreen = ({ onFinish }) => {
           stage === 'reveal' ? 'opacity-70' : 'opacity-0'
         }`}
       >
-        Click or press <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">Esc</kbd> to enter
+        <span className="md:hidden">Tap anywhere to enter</span>
+        <span className="hidden md:inline">Click or press <kbd className="px-1.5 py-0.5 rounded-md bg-slate-800 text-slate-300 font-mono text-[10px] border border-slate-700 shadow-2xs">Esc</kbd> to enter</span>
       </div>
     </div>
   );

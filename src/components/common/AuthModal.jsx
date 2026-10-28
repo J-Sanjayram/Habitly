@@ -175,7 +175,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 mb-1">
+            <div className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Shift + Enter Shortcut</span>
             </div>
@@ -305,7 +305,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'login
           </div>
         </form>
 
-        <p className="mt-4 text-center text-[11px] text-slate-400 flex items-center justify-center gap-1">
+        <p className="mt-4 hidden md:flex items-center justify-center gap-1.5 text-[11px] text-slate-400">
           <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">← / → Arrow keys</kbd>
           <span>to move between buttons</span>
         </p>

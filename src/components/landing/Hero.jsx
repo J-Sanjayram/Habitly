@@ -67,14 +67,35 @@ export const Hero = ({ onGetStarted }) => {
             </a>
           </div>
 
-          {/* Keyboard shortcut quick hints */}
-          <div className="pt-1 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-              <span className="font-mono font-bold text-slate-700 dark:text-slate-200">← → ↑ ↓</span> Arrow keys to move between buttons
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-              <kbd className="font-mono font-bold text-slate-700 dark:text-slate-200">Enter</kbd> Open dashboard
-            </span>
+          {/* Keyboard shortcut power-user pill (Desktop Only) */}
+          <div className="pt-2 hidden md:flex items-center justify-center">
+            <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-xs text-slate-500 dark:text-slate-400">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Keyboard Ready
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
+                  ← → ↑ ↓
+                </kbd>
+                <span>Navigate buttons</span>
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
+                  ↵ Enter
+                </kbd>
+                <span>Open tracker</span>
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono font-bold text-[11px] text-slate-700 dark:text-slate-200 shadow-2xs">
+                  Shift + ↵
+                </kbd>
+                <span>Sign in</span>
+              </span>
+            </div>
           </div>
 
           {/* Social proof chips */}
