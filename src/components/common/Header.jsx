@@ -21,70 +21,72 @@ export const Header = ({ currentView, onViewChange, onOpenAuth, onOpenTour, user
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800 transition-colors">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
-        <button
-          id="nav-brand-logo"
-          type="button"
-          onClick={() => handleNavClick('landing')}
-          className="flex items-center gap-2.5 font-display font-extrabold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 z-10 group"
-          aria-label="Habitly home"
-        >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-            <Sparkles className="w-5 h-5 fill-white" />
-          </div>
-          <span className="font-display font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
-            Habitly
-          </span>
-        </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        {/* Left Side: Brand Logo & Navigation Links */}
+        <div className="flex items-center gap-6 xl:gap-8 min-w-0">
+          <button
+            id="nav-brand-logo"
+            type="button"
+            onClick={() => handleNavClick('landing')}
+            className="flex items-center gap-2.5 font-display font-extrabold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 group shrink-0"
+            aria-label="Habitly home"
+          >
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <Sparkles className="w-5 h-5 fill-white" />
+            </div>
+            <span className="font-display font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
+              Habitly
+            </span>
+          </button>
 
-        {/* Desktop Navigation Links (Centered on Laptop/Desktop, Flow on Tablet) */}
-        <nav
-          aria-label="Main Navigation"
-          className="hidden md:flex items-center gap-5 lg:gap-8 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
-        >
-          {currentView === 'landing' ? (
-            <>
+          {/* Desktop Navigation Links (Flows naturally without absolute positioning overlap) */}
+          <nav
+            aria-label="Main Navigation"
+            className="hidden lg:flex items-center gap-6"
+          >
+            {currentView === 'landing' ? (
+              <>
+                <button
+                  id="nav-link-features"
+                  type="button"
+                  onClick={() => handleNavClick('landing', 'features')}
+                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap"
+                >
+                  Features
+                </button>
+                <button
+                  id="nav-link-testimonials"
+                  type="button"
+                  onClick={() => handleNavClick('landing', 'testimonials')}
+                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap"
+                >
+                  Testimonials
+                </button>
+                <button
+                  id="nav-link-pricing"
+                  type="button"
+                  onClick={() => handleNavClick('landing', 'pricing')}
+                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap"
+                >
+                  Pricing
+                </button>
+              </>
+            ) : (
               <button
-                id="nav-link-features"
+                id="nav-link-landing"
                 type="button"
-                onClick={() => handleNavClick('landing', 'features')}
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
+                onClick={() => handleNavClick('landing')}
+                className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap"
               >
-                Features
+                <Home className="w-4 h-4" />
+                <span>Back to Landing Page</span>
               </button>
-              <button
-                id="nav-link-testimonials"
-                type="button"
-                onClick={() => handleNavClick('landing', 'testimonials')}
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
-              >
-                Testimonials
-              </button>
-              <button
-                id="nav-link-pricing"
-                type="button"
-                onClick={() => handleNavClick('landing', 'pricing')}
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
-              >
-                Pricing
-              </button>
-            </>
-          ) : (
-            <button
-              id="nav-link-landing"
-              type="button"
-              onClick={() => handleNavClick('landing')}
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
-            >
-              <Home className="w-4 h-4" />
-              <span>Back to Landing Page</span>
-            </button>
-          )}
-        </nav>
+            )}
+          </nav>
+        </div>
 
         {/* Actions (User Avatar Chip / Sign In + Theme Toggle + Mode Switcher) */}
-        <div className="hidden md:flex items-center gap-2 lg:gap-2.5 z-10">
+        <div className="hidden md:flex items-center gap-2 lg:gap-2.5 shrink-0 z-10">
           {/* User Profile / Auth Trigger */}
           {onOpenAuth && (
             user?.isAuthenticated ? (
