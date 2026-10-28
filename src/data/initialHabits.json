@@ -1,0 +1,79 @@
+[
+  {
+    "id": "h-1",
+    "title": "Drink 2.5L of Water",
+    "category": "Health",
+    "frequency": "Daily",
+    "target": "Hydrate consistently every 2 hours",
+    "streak": 14,
+    "completedToday": true,
+    "createdAt": "2026-10-14",
+    "weeklyHistory": [true, true, true, true, true, true, true]
+  },
+  {
+    "id": "h-2",
+    "title": "Morning 5km Run",
+    "category": "Fitness",
+    "frequency": "Daily",
+    "target": "Outdoor cardio before 7:30 AM",
+    "streak": 6,
+    "completedToday": false,
+    "createdAt": "2026-10-20",
+    "weeklyHistory": [true, true, true, true, true, false, false]
+  },
+  {
+    "id": "h-3",
+    "title": "Deep Work Coding Block",
+    "category": "Productivity",
+    "frequency": "Daily",
+    "target": "90 mins of uninterrupted dev session",
+    "streak": 21,
+    "completedToday": true,
+    "createdAt": "2026-10-01",
+    "weeklyHistory": [true, true, true, true, true, true, true]
+  },
+  {
+    "id": "h-4",
+    "title": "Read 25 Pages of Book",
+    "category": "Learning",
+    "frequency": "Daily",
+    "target": "Non-fiction or technical literature",
+    "streak": 9,
+    "completedToday": false,
+    "createdAt": "2026-10-18",
+    "weeklyHistory": [true, false, true, true, true, true, false]
+  },
+  {
+    "id": "h-5",
+    "title": "15-Minute Meditation",
+    "category": "Mindfulness",
+    "frequency": "Daily",
+    "target": "Breathwork & mindful body scan",
+    "streak": 18,
+    "completedToday": true,
+    "createdAt": "2026-10-05",
+    "weeklyHistory": [true, true, true, true, true, true, true]
+  },
+  {
+    "id": "h-6",
+    "title": "Weekly Finances & Budget Review",
+    "category": "Productivity",
+    "frequency": "Weekly",
+    "target": "Reconcile weekly spend and investments",
+    "streak": 4,
+    "completedToday": false,
+    "createdAt": "2026-09-28",
+    "weeklyHistory": [false, false, false, false, false, true, false]
+  },
+  {
+    "id": "h-7",
+    "title": "Digital Sunset (No screens after 10 PM)",
+    "category": "Health",
+    "frequency": "Daily",
+    "target": "Read or stretch instead of phone screen",
+    "streak": 3,
+    "completedToday": false,
+    "createdAt": "2026-10-24",
+    "weeklyHistory": [false, false, true, true, true, false, false]
+  }
+]
