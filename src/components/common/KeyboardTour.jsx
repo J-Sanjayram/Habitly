@@ -59,6 +59,17 @@ export const KeyboardTour = ({ isOpen, onClose, onOpenTracker }) => {
 
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+              Open Sign In / Sign Up
+            </span>
+            <div className="flex items-center gap-1 font-mono text-xs">
+              <kbd className="px-2 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">Shift</kbd>
+              <span>+</span>
+              <kbd className="px-2 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-bold shadow-xs">Enter</kbd>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
               Dismiss modals / Clear search
             </span>
             <kbd className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-mono text-xs font-bold shadow-xs">
@@ -125,6 +136,28 @@ export const KeyboardTour = ({ isOpen, onClose, onOpenTracker }) => {
             if (document.activeElement === last) {
               e.preventDefault();
               first.focus();
+            }
+          }
+        }
+
+        // Arrow Key navigation across buttons
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+          const activeEl = document.activeElement;
+          const isButton = activeEl && activeEl.tagName === 'BUTTON';
+
+          if (isButton && modalRef.current) {
+            const allButtons = Array.from(modalRef.current.querySelectorAll('button:not([disabled])'));
+            const currentIndex = allButtons.indexOf(activeEl);
+
+            if (currentIndex !== -1) {
+              e.preventDefault();
+              let nextIndex;
+              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                nextIndex = (currentIndex + 1) % allButtons.length;
+              } else {
+                nextIndex = (currentIndex - 1 + allButtons.length) % allButtons.length;
+              }
+              allButtons[nextIndex]?.focus();
             }
           }
         }

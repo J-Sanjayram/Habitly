@@ -6,12 +6,14 @@ import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { SplashScreen } from './components/common/SplashScreen';
 import { KeyboardTour } from './components/common/KeyboardTour';
+import { AuthModal } from './components/common/AuthModal';
 import { LandingPage } from './components/landing/LandingPage';
 import { TrackerPage } from './components/tracker/TrackerPage';
 
 function HabitlyApp() {
   const [showSplash, setShowSplash] = useState(true);
   const [showTour, setShowTour] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [currentView, setCurrentView] = useState(() => {
     // Check hash or default to 'landing'
     if (window.location.hash === '#tracker') {
@@ -33,6 +35,18 @@ function HabitlyApp() {
     window.location.hash = view === 'tracker' ? '#tracker' : '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Global Shortcut: Shift + Enter to open Sign In / Sign Up
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.shiftKey && e.key === 'Enter') {
+        e.preventDefault();
+        setShowAuth(true);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -58,6 +72,13 @@ function HabitlyApp() {
         onOpenTracker={() => handleViewChange('tracker')}
       />
 
+      {/* Sign In / Sign Up Modal with Arrow Key Navigation */}
+      <AuthModal
+        isOpen={showAuth}
+        onClose={() => setShowAuth(false)}
+        onAuthSuccess={() => handleViewChange('tracker')}
+      />
+
       {/* Skip to Content Link for Accessibility */}
       <a
         href="#main-content"
@@ -67,7 +88,11 @@ function HabitlyApp() {
       </a>
 
       {/* Persistent Navigation Header */}
-      <Header currentView={currentView} onViewChange={handleViewChange} />
+      <Header
+        currentView={currentView}
+        onViewChange={handleViewChange}
+        onOpenAuth={() => setShowAuth(true)}
+      />
 
       {/* Main Content Area */}
       <main id="main-content" className="flex-1">
