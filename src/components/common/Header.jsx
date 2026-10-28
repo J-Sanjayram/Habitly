@@ -21,12 +21,12 @@ export const Header = ({ currentView, onViewChange }) => {
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/80 dark:border-slate-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo */}
         <button
           type="button"
           onClick={() => handleNavClick('landing')}
-          className="flex items-center gap-2.5 font-bold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500"
+          className="flex items-center gap-2.5 font-bold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 z-10"
           aria-label="Habitly home"
         >
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
@@ -37,8 +37,11 @@ export const Header = ({ currentView, onViewChange }) => {
           </span>
         </button>
 
-        {/* Desktop Navigation Links */}
-        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-8">
+        {/* Desktop Navigation Links (Centered on Laptop/Desktop) */}
+        <nav
+          aria-label="Main Navigation"
+          className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2"
+        >
           {currentView === 'landing' ? (
             <>
               <button
@@ -76,7 +79,7 @@ export const Header = ({ currentView, onViewChange }) => {
         </nav>
 
         {/* Actions (Theme Toggle + Mode Switcher / Sign Up) */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3 z-10">
           {/* Dark Mode Toggle */}
           <button
             type="button"
@@ -110,7 +113,7 @@ export const Header = ({ currentView, onViewChange }) => {
         </div>
 
         {/* Mobile menu trigger */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-2 z-10">
           <button
             type="button"
             onClick={toggleTheme}
