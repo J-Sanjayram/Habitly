@@ -321,3 +321,4 @@ export const TrackerPage = () => {
     </div>
   );
 };
+

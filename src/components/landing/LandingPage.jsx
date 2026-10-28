@@ -14,3 +14,4 @@ export const LandingPage = ({ onOpenTracker }) => {
     </main>
   );
 };
+

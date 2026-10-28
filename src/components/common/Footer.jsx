@@ -96,3 +96,4 @@ export const Footer = ({ onViewChange }) => {
     </footer>
   );
 };
+

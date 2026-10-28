@@ -183,3 +183,4 @@ export const Pricing = ({ onSelectPlan }) => {
     </section>
   );
 };
+

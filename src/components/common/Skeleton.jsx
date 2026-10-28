@@ -9,7 +9,7 @@ export const SkeletonBox = ({ className = '' }) => (
 
 export const HabitCardSkeleton = () => (
   <div
-    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between h-48 animate-pulse"
+    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between min-h-[200px] animate-pulse"
     aria-hidden="true"
   >
     <div>
@@ -21,15 +21,15 @@ export const HabitCardSkeleton = () => (
       <SkeletonBox className="h-4 w-1/2" />
     </div>
 
-    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-      <div className="flex items-center gap-1.5">
+    <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
+      <div className="flex items-center justify-between sm:justify-start gap-1.5">
         {[...Array(7)].map((_, i) => (
-          <SkeletonBox key={i} className="w-5 h-5 rounded-full" />
+          <SkeletonBox key={i} className="w-5 h-5 rounded-md" />
         ))}
       </div>
-      <div className="flex items-center gap-2">
-        <SkeletonBox className="w-8 h-8 rounded-lg" />
-        <SkeletonBox className="w-24 h-9 rounded-xl" />
+      <div className="flex items-center gap-2 w-full sm:w-auto">
+        <SkeletonBox className="w-10 h-10 rounded-xl shrink-0" />
+        <SkeletonBox className="h-10 flex-1 sm:w-28 rounded-xl" />
       </div>
     </div>
   </div>
@@ -63,3 +63,4 @@ export const LoadingStateView = () => (
     </div>
   </div>
 );
+

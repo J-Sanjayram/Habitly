@@ -96,3 +96,4 @@ npm run preview
 - **Lucide React** (Clean, accessible SVG iconography).
 - **Canvas-Confetti** (Lightweight micro-celebration feedback).
 - **Vite** (Lightning-fast development and build pipeline).
+

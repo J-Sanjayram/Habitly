@@ -189,3 +189,4 @@ export const Header = ({ currentView, onViewChange }) => {
     </header>
   );
 };
+

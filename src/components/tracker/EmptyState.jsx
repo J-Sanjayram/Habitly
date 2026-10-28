@@ -42,3 +42,4 @@ export const EmptyState = ({ onOpenAddModal, onResetSample }) => {
     </div>
   );
 };
+

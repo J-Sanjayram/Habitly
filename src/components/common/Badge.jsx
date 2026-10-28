@@ -21,3 +21,4 @@ export const Badge = ({ children, category = 'Default', size = 'sm', className =
     </span>
   );
 };
+

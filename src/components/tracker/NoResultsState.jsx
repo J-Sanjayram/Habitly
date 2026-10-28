@@ -53,3 +53,4 @@ export const NoResultsState = ({ searchQuery, selectedCategory, selectedStatus, 
     </div>
   );
 };
+

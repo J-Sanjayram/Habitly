@@ -62,25 +62,27 @@ export const FilterControls = ({
           )}
         </div>
 
-        {/* Sort Dropdown */}
-        <div className="flex items-center gap-2">
-          <div className="relative">
+        {/* Sort Dropdown & Add Habit Button */}
+        <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
+          <div className="relative flex-1 sm:flex-initial">
             <label htmlFor="sort-habits" className="sr-only">
               Sort habits
             </label>
-            <div className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-xs">
-              <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
-              <select
-                id="sort-habits"
-                value={sortBy}
-                onChange={(e) => onSortChange(e.target.value)}
-                className="bg-transparent border-none text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
-              >
-                <option value="streak-desc">Highest Streak</option>
-                <option value="name-asc">Name (A – Z)</option>
-                <option value="name-desc">Name (Z – A)</option>
-                <option value="newest">Newest First</option>
-              </select>
+            <div className="flex items-center justify-between sm:justify-start gap-1.5 px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-xs">
+              <div className="flex items-center gap-1.5">
+                <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <select
+                  id="sort-habits"
+                  value={sortBy}
+                  onChange={(e) => onSortChange(e.target.value)}
+                  className="bg-transparent border-none text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer"
+                >
+                  <option value="streak-desc">Highest Streak</option>
+                  <option value="name-asc">Name (A – Z)</option>
+                  <option value="name-desc">Name (Z – A)</option>
+                  <option value="newest">Newest First</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -166,3 +168,4 @@ export const FilterControls = ({
     </div>
   );
 };
+

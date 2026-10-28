@@ -108,3 +108,4 @@ export const StatsSummary = ({ habits }) => {
     </section>
   );
 };
+
