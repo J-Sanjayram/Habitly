@@ -37,7 +37,7 @@ export const Hero = ({ onGetStarted, onOpenTour }) => {
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
             Build rituals that stick,{' '}
-            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">
+            <span className="inline-block bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 dark:from-emerald-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent dark:text-transparent">
               without the burnout.
             </span>
           </h1>
