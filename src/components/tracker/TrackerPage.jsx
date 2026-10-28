@@ -10,11 +10,11 @@ import { NoResultsState } from './NoResultsState';
 import { ErrorState } from './ErrorState';
 import { LoadingStateView } from '../common/Skeleton';
 import { DevStateControls } from './DevStateControls';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Camera, User } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Health', 'Fitness', 'Productivity', 'Mindfulness', 'Learning'];
 
-export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
+export const TrackerPage = ({ onReplaySplash, onOpenTour, user, onOpenAuth }) => {
   const { showToast } = useToast();
 
   // State
@@ -368,6 +368,62 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
         onReplaySplash={onReplaySplash}
         onOpenTour={onOpenTour}
       />
+
+      {/* User Profile Overview & Greeting Banner */}
+      <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent dark:from-emerald-950/40 dark:via-slate-900/40 dark:to-slate-900 border border-emerald-500/20 dark:border-emerald-500/20 backdrop-blur-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          {/* Profile Picture with live ring */}
+          <div className="relative shrink-0">
+            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full ring-2 ring-emerald-500 p-0.5 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name || 'User profile'}
+                  className="w-full h-full rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-emerald-100 dark:bg-emerald-900/60 flex items-center justify-center text-emerald-600">
+                  <User className="w-6 h-6" />
+                </div>
+              )}
+            </div>
+            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900" title="Online" />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                Welcome back, {user?.name || 'Habit Builder'}!
+              </h2>
+              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300">
+                <Sparkles className="w-3 h-3" />
+                Active Streak
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {user?.email || 'alex.morgan@habitly.app'} • {user?.joinedDate || 'Member'}
+            </p>
+          </div>
+        </div>
+
+        {/* Quick Action: Change Profile Photo / Edit Profile */}
+        {onOpenAuth && (
+          <div className="flex items-center gap-2 self-start sm:self-center">
+            <button
+              id="tracker-edit-profile-btn"
+              type="button"
+              onClick={() => onOpenAuth('signup')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/80 transition-colors shadow-2xs focus-visible:ring-2 focus-visible:ring-emerald-500"
+            >
+              <Camera className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>Change Photo / Profile</span>
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Screen Title & Motivation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">

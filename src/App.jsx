@@ -6,14 +6,22 @@ import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { SplashScreen } from './components/common/SplashScreen';
 import { KeyboardTour } from './components/common/KeyboardTour';
-import { AuthModal } from './components/common/AuthModal';
+import { AuthModal, AVATAR_PRESETS } from './components/common/AuthModal';
 import { LandingPage } from './components/landing/LandingPage';
 import { TrackerPage } from './components/tracker/TrackerPage';
+
+const DEFAULT_USER = {
+  name: 'Alex Morgan',
+  email: 'alex.morgan@habitly.app',
+  avatar: AVATAR_PRESETS[0],
+  joinedDate: 'Member since Oct 2026',
+};
 
 function HabitlyApp() {
   const [showSplash, setShowSplash] = useState(true);
   const [showTour, setShowTour] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState('signup');
   const [currentView, setCurrentView] = useState(() => {
     // Check hash or default to 'landing'
     if (window.location.hash === '#tracker') {
@@ -21,6 +29,27 @@ function HabitlyApp() {
     }
     return 'landing';
   });
+
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('habitly_user_profile');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.warn('Failed to parse saved user profile:', e);
+    }
+    return DEFAULT_USER;
+  });
+
+  // Sync user profile to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('habitly_user_profile', JSON.stringify(user));
+    } catch (e) {
+      console.warn('LocalStorage error saving user:', e);
+    }
+  }, [user]);
 
   const handleSplashFinish = () => {
     setShowSplash(false);
@@ -38,13 +67,25 @@ function HabitlyApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenAuth = (mode = 'signup') => {
+    setAuthMode(mode);
+    setShowAuth(true);
+  };
+
+  const handleAuthSuccess = (authenticatedUser) => {
+    if (authenticatedUser) {
+      setUser(authenticatedUser);
+    }
+    handleViewChange('tracker');
+  };
+
   // Global Shortcuts: Shift + Enter for Auth, Enter for Tracker (when on landing)
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
       // Shift + Enter: open Sign In / Sign Up
       if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault();
-        setShowAuth(true);
+        handleOpenAuth('signup');
         return;
       }
 
@@ -87,11 +128,13 @@ function HabitlyApp() {
         onOpenTracker={() => handleViewChange('tracker')}
       />
 
-      {/* Sign In / Sign Up Modal with Arrow Key Navigation */}
+      {/* Sign In / Sign Up Modal with Avatar Upload & Image URL */}
       <AuthModal
         isOpen={showAuth}
+        initialMode={authMode}
+        user={user}
         onClose={() => setShowAuth(false)}
-        onAuthSuccess={() => handleViewChange('tracker')}
+        onAuthSuccess={handleAuthSuccess}
       />
 
       {/* Skip to Content Link for Accessibility */}
@@ -102,11 +145,12 @@ function HabitlyApp() {
         Skip to main content
       </a>
 
-      {/* Persistent Navigation Header */}
+      {/* Persistent Navigation Header with User Avatar */}
       <Header
         currentView={currentView}
+        user={user}
         onViewChange={handleViewChange}
-        onOpenAuth={() => setShowAuth(true)}
+        onOpenAuth={handleOpenAuth}
       />
 
       {/* Main Content Area */}
@@ -115,6 +159,8 @@ function HabitlyApp() {
           <LandingPage onOpenTracker={() => handleViewChange('tracker')} />
         ) : (
           <TrackerPage
+            user={user}
+            onOpenAuth={handleOpenAuth}
             onReplaySplash={() => setShowSplash(true)}
             onOpenTour={() => setShowTour(true)}
           />
@@ -142,4 +188,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
