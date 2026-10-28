@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Lock, Mail, User, ArrowRight, Sparkles, Camera, Upload, Link as LinkIcon } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
-
-export const AVATAR_PRESETS = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
-  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=250&q=80',
-  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80',
-];
+import { AVATAR_PRESETS } from '../../data/avatarPresets';
 
 export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'signup', user }) => {
   const [mode, setMode] = useState(initialMode); // 'login' | 'signup'

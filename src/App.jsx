@@ -6,7 +6,8 @@ import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { SplashScreen } from './components/common/SplashScreen';
 import { KeyboardTour } from './components/common/KeyboardTour';
-import { AuthModal, AVATAR_PRESETS } from './components/common/AuthModal';
+import { AuthModal } from './components/common/AuthModal';
+import { AVATAR_PRESETS } from './data/avatarPresets';
 import { LandingPage } from './components/landing/LandingPage';
 import { TrackerPage } from './components/tracker/TrackerPage';
 
