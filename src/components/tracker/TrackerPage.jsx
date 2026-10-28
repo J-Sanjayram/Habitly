@@ -374,12 +374,18 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour, user, onOpenAuth }) =>
         <div className="flex items-center gap-3.5">
           {/* Profile Picture with live ring */}
           <div className="relative shrink-0">
-            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full ring-2 ring-emerald-500 p-0.5 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
+            <button
+              type="button"
+              id="tracker-avatar-btn"
+              onClick={() => onOpenAuth && onOpenAuth('signup')}
+              title="Click to update profile photo"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ring-emerald-500 hover:ring-4 p-0.5 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 group relative block"
+            >
               {user?.avatar ? (
                 <img
                   src={user.avatar}
                   alt={user.name || 'User profile'}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover group-hover:scale-105 transition-transform"
                   onError={(e) => {
                     e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';
                   }}
@@ -389,8 +395,11 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour, user, onOpenAuth }) =>
                   <User className="w-6 h-6" />
                 </div>
               )}
-            </div>
-            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900" title="Online" />
+              <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <Camera className="w-5 h-5 text-white" />
+              </div>
+            </button>
+            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 pointer-events-none" title="Online" />
           </div>
 
           <div>

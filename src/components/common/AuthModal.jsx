@@ -357,7 +357,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'signu
                 <div className="flex items-center gap-3">
                   {/* Live circular avatar preview */}
                   <div className="relative shrink-0">
-                    <div className="w-13 h-13 rounded-full ring-2 ring-emerald-500/50 overflow-hidden bg-slate-200 dark:bg-slate-700 flex items-center justify-center shadow-inner">
+                    <div className="w-14 h-14 rounded-full ring-2 ring-emerald-500/50 overflow-hidden bg-slate-200 dark:bg-slate-700 flex items-center justify-center shadow-inner">
                       {avatar ? (
                         <img
                           src={avatar}
