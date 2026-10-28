@@ -4,10 +4,12 @@ import { ToastProvider } from './context/ToastContext';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
+import { SplashScreen } from './components/common/SplashScreen';
 import { LandingPage } from './components/landing/LandingPage';
 import { TrackerPage } from './components/tracker/TrackerPage';
 
 function HabitlyApp() {
+  const [showSplash, setShowSplash] = useState(true);
   const [currentView, setCurrentView] = useState(() => {
     // Check hash or default to 'landing'
     if (window.location.hash === '#tracker') {
@@ -36,6 +38,9 @@ function HabitlyApp() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors selection:bg-emerald-500 selection:text-white">
+      {/* Fast & Lightweight Animated Logo Splash Screen */}
+      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+
       {/* Skip to Content Link for Accessibility */}
       <a
         href="#main-content"
@@ -52,7 +57,7 @@ function HabitlyApp() {
         {currentView === 'landing' ? (
           <LandingPage onOpenTracker={() => handleViewChange('tracker')} />
         ) : (
-          <TrackerPage />
+          <TrackerPage onReplaySplash={() => setShowSplash(true)} />
         )}
       </main>
 

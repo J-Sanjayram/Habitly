@@ -7,6 +7,7 @@ export const DevStateControls = ({
   isError,
   onResetData,
   onClearAll,
+  onReplaySplash,
 }) => {
   return (
     <aside
@@ -37,6 +38,19 @@ export const DevStateControls = ({
             <RefreshCw className="w-3 h-3 text-slate-500" />
             <span>Simulate Loading</span>
           </button>
+
+          {/* Replay Splash Screen */}
+          {onReplaySplash && (
+            <button
+              type="button"
+              onClick={onReplaySplash}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+              title="Replay the logo reveal splash screen animation"
+            >
+              <Sparkles className="w-3 h-3 text-emerald-500" />
+              <span>Replay Splash</span>
+            </button>
+          )}
 
           {/* Toggle Error State */}
           <button
