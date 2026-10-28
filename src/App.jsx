@@ -16,6 +16,7 @@ const DEFAULT_USER = {
   email: 'alex.morgan@habitly.app',
   avatar: AVATAR_PRESETS[0],
   joinedDate: 'Member since Oct 2026',
+  isAuthenticated: false,
 };
 
 function HabitlyApp() {
@@ -157,7 +158,11 @@ function HabitlyApp() {
       {/* Main Content Area */}
       <main id="main-content" className="flex-1">
         {currentView === 'landing' ? (
-          <LandingPage onOpenTracker={() => handleViewChange('tracker')} />
+          <LandingPage
+            onOpenTracker={() => handleViewChange('tracker')}
+            onOpenAuth={handleOpenAuth}
+            isAuthenticated={user?.isAuthenticated}
+          />
         ) : (
           <TrackerPage
             user={user}

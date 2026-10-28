@@ -143,6 +143,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'signu
       email: email.trim() || 'alex.morgan@habitly.app',
       avatar: avatar.trim() || AVATAR_PRESETS[0],
       joinedDate: user?.joinedDate || 'Member since Today',
+      isAuthenticated: true,
     };
 
     // Successful Auth
@@ -160,6 +161,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialMode = 'signu
       email: 'alex.morgan@habitly.app',
       avatar: AVATAR_PRESETS[0],
       joinedDate: 'Demo Account',
+      isAuthenticated: true,
     };
     showToast({
       message: 'Signed in as Demo Guest! Loading habits dashboard...',

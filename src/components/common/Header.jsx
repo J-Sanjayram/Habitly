@@ -87,34 +87,59 @@ export const Header = ({ currentView, onViewChange, onOpenAuth, user }) => {
         <div className="hidden md:flex items-center gap-2 lg:gap-2.5 z-10">
           {/* User Profile / Auth Trigger */}
           {onOpenAuth && (
-            <button
-              id="nav-auth-btn"
-              type="button"
-              onClick={() => onOpenAuth('signup')}
-              className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-800 hover:border-slate-300 dark:border-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap shadow-xs group"
-              title="Profile Settings & Photo (Shortcut: Shift + Enter)"
-            >
-              {user?.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt={user.name || 'User avatar'}
-                  className="w-5 h-5 rounded-full object-cover ring-1 ring-emerald-500/60"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-              ) : (
-                <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center">
-                  <User className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                </div>
-              )}
-              <span className="max-w-[95px] truncate font-medium">
-                {user?.name ? user.name.split(' ')[0] : 'Sign In'}
-              </span>
-              <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-bold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-2xs">
-                Shift+Enter
-              </kbd>
-            </button>
+            user?.isAuthenticated ? (
+              <button
+                id="nav-auth-btn"
+                type="button"
+                onClick={() => onOpenAuth('signup')}
+                className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-800 hover:border-slate-300 dark:border-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 whitespace-nowrap shadow-xs group"
+                title="Profile Settings & Photo (Shortcut: Shift + Enter)"
+              >
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name || 'User avatar'}
+                    className="w-5 h-5 rounded-full object-cover ring-1 ring-emerald-500/60"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center">
+                    <User className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                )}
+                <span className="max-w-[95px] truncate font-medium">
+                  {user?.name ? user.name.split(' ')[0] : 'Profile'}
+                </span>
+                <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-bold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-2xs">
+                  Shift+Enter
+                </kbd>
+              </button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  id="nav-signin-btn"
+                  type="button"
+                  onClick={() => onOpenAuth('login')}
+                  className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
+                >
+                  Sign In
+                </button>
+                <button
+                  id="nav-signup-btn"
+                  type="button"
+                  onClick={() => onOpenAuth('signup')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-800 hover:border-slate-300 dark:border-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 shadow-2xs"
+                  title="Create Free Account (Shortcut: Shift + Enter)"
+                >
+                  <span>Sign Up</span>
+                  <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono font-bold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-2xs">
+                    Shift+Enter
+                  </kbd>
+                </button>
+              </div>
+            )
           )}
 
           {/* Dark Mode Toggle */}
@@ -179,8 +204,8 @@ export const Header = ({ currentView, onViewChange, onOpenAuth, user }) => {
       {/* Mobile dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 px-4 pt-3 pb-6 space-y-3 animate-fade-in">
-          {/* User profile card on mobile */}
-          {user && (
+          {/* User profile card or Auth buttons on mobile */}
+          {user?.isAuthenticated ? (
             <div className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3 min-w-0">
                 {user.avatar ? (
@@ -213,6 +238,31 @@ export const Header = ({ currentView, onViewChange, onOpenAuth, user }) => {
                 </button>
               )}
             </div>
+          ) : (
+            onOpenAuth && (
+              <div className="grid grid-cols-2 gap-2 pb-2 border-b border-slate-200 dark:border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAuth('login');
+                  }}
+                  className="w-full py-2 px-3 text-center rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAuth('signup');
+                  }}
+                  className="w-full py-2 px-3 text-center rounded-xl text-xs font-semibold text-white bg-emerald-600"
+                >
+                  Create Account
+                </button>
+              </div>
+            )
           )}
 
           {currentView === 'landing' ? (
