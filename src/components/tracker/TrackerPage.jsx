@@ -14,7 +14,7 @@ import { Sparkles } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Health', 'Fitness', 'Productivity', 'Mindfulness', 'Learning'];
 
-export const TrackerPage = ({ onReplaySplash }) => {
+export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
   const { showToast } = useToast();
 
   // State
@@ -235,6 +235,7 @@ export const TrackerPage = ({ onReplaySplash }) => {
         onResetData={handleResetData}
         onClearAll={handleClearAll}
         onReplaySplash={onReplaySplash}
+        onOpenTour={onOpenTour}
       />
 
       {/* Screen Title & Motivation */}

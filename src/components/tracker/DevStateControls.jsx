@@ -8,6 +8,7 @@ export const DevStateControls = ({
   onResetData,
   onClearAll,
   onReplaySplash,
+  onOpenTour,
 }) => {
   return (
     <aside
@@ -49,6 +50,19 @@ export const DevStateControls = ({
             >
               <Sparkles className="w-3 h-3 text-emerald-500" />
               <span>Replay Splash</span>
+            </button>
+          )}
+
+          {/* Open Keyboard Tour */}
+          {onOpenTour && (
+            <button
+              type="button"
+              onClick={onOpenTour}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+              title="Open the keyboard-first accessibility tour"
+            >
+              <span className="font-mono text-xs">⌨️</span>
+              <span>Keyboard Tour</span>
             </button>
           )}
 

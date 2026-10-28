@@ -5,11 +5,13 @@ import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { SplashScreen } from './components/common/SplashScreen';
+import { KeyboardTour } from './components/common/KeyboardTour';
 import { LandingPage } from './components/landing/LandingPage';
 import { TrackerPage } from './components/tracker/TrackerPage';
 
 function HabitlyApp() {
   const [showSplash, setShowSplash] = useState(true);
+  const [showTour, setShowTour] = useState(false);
   const [currentView, setCurrentView] = useState(() => {
     // Check hash or default to 'landing'
     if (window.location.hash === '#tracker') {
@@ -17,6 +19,14 @@ function HabitlyApp() {
     }
     return 'landing';
   });
+
+  const handleSplashFinish = () => {
+    setShowSplash(false);
+    // Automatically trigger keyboard tour after splash screen
+    setTimeout(() => {
+      setShowTour(true);
+    }, 150);
+  };
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -39,7 +49,10 @@ function HabitlyApp() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors selection:bg-emerald-500 selection:text-white">
       {/* Fast & Lightweight Animated Logo Splash Screen */}
-      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+      {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
+
+      {/* Interactive Keyboard Accessibility Tour Guide */}
+      <KeyboardTour isOpen={showTour} onClose={() => setShowTour(false)} />
 
       {/* Skip to Content Link for Accessibility */}
       <a
@@ -57,12 +70,18 @@ function HabitlyApp() {
         {currentView === 'landing' ? (
           <LandingPage onOpenTracker={() => handleViewChange('tracker')} />
         ) : (
-          <TrackerPage onReplaySplash={() => setShowSplash(true)} />
+          <TrackerPage
+            onReplaySplash={() => setShowSplash(true)}
+            onOpenTour={() => setShowTour(true)}
+          />
         )}
       </main>
 
       {/* Persistent Accessible Footer */}
-      <Footer onViewChange={handleViewChange} />
+      <Footer
+        onViewChange={handleViewChange}
+        onOpenTour={() => setShowTour(true)}
+      />
 
       {/* Notification Toast Container */}
       <ToastContainer />

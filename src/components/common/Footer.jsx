@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sparkles, Heart, Keyboard, CheckCircle2 } from 'lucide-react';
 
-export const Footer = ({ onViewChange }) => {
+export const Footer = ({ onViewChange, onOpenTour }) => {
   return (
     <footer className="w-full bg-slate-900 text-slate-300 border-t border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -85,6 +85,15 @@ export const Footer = ({ onViewChange }) => {
                 <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Ctrl/Cmd + K</kbd> Focus search
               </li>
             </ul>
+            {onOpenTour && (
+              <button
+                type="button"
+                onClick={onOpenTour}
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+              >
+                <span>Interactive Keyboard Tour →</span>
+              </button>
+            )}
           </div>
         </div>
 
