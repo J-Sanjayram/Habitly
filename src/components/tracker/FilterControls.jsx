@@ -52,12 +52,9 @@ export const FilterControls = ({
                 onSearchChange('');
               } else if (e.key === 'ArrowDown') {
                 e.preventDefault();
-                const firstCard = document.getElementById('habit-card-0');
-                if (firstCard) {
-                  firstCard.focus();
-                } else {
-                  document.querySelector('[role="tablist"] button')?.focus();
-                }
+                const target = document.getElementById('tracker-add-habit-btn') ||
+                               document.querySelector('[id^="category-tab-"]');
+                target?.focus();
               }
             }}
             placeholder="Search habits... (Press Ctrl+K, Esc to clear)"

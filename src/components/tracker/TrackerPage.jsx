@@ -292,7 +292,20 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
       const isForward = e.key === 'ArrowRight' || e.key === 'ArrowDown';
       const isBackward = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
 
-      const currentIndex = focusable.indexOf(activeEl);
+      // Resolve active element or its closest button/link
+      const currentInteractive = activeEl?.closest?.('button:not([disabled]), a[href]:not([disabled])') || activeEl;
+      let currentIndex = focusable.indexOf(currentInteractive);
+
+      // If clicked inside a habit card container, start from that card's buttons
+      if (currentIndex === -1) {
+        const cardParent = activeEl?.closest?.('article[id^="habit-card-"]');
+        if (cardParent) {
+          const cardBtn = cardParent.querySelector('button:not([disabled])');
+          if (cardBtn) {
+            currentIndex = focusable.indexOf(cardBtn);
+          }
+        }
+      }
 
       if (currentIndex !== -1) {
         // Continuous, sequential cycling across all buttons on the page (no traps/loops)
