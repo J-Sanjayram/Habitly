@@ -22,18 +22,20 @@ export const EmptyState = ({ onOpenAddModal, onResetSample }) => {
 
       <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
+          id="empty-create-habit-btn"
           type="button"
           onClick={onOpenAddModal}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm shadow-emerald-600/30 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm shadow-emerald-600/30 transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40"
         >
           <PlusCircle className="w-4 h-4" />
           <span>Create Your First Habit</span>
         </button>
 
         <button
+          id="empty-load-sample-btn"
           type="button"
           onClick={onResetSample}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
         >
           <Sparkles className="w-4 h-4 text-emerald-500" />
           <span>Load Sample Habits</span>

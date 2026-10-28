@@ -42,9 +42,10 @@ export const NoResultsState = ({ searchQuery, selectedCategory, selectedStatus, 
 
       <div className="mt-6">
         <button
+          id="no-results-reset-btn"
           type="button"
           onClick={onResetFilters}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset All Filters &amp; Search</span>

@@ -31,9 +31,10 @@ export const DevStateControls = ({
         <div className="flex flex-wrap items-center gap-2">
           {/* Trigger Skeleton Loading */}
           <button
+            id="dev-simulate-loading"
             type="button"
             onClick={onSimulateLoading}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
             title="Reloads with 1.2s skeleton loader"
           >
             <RefreshCw className="w-3 h-3 text-slate-500" />
@@ -43,9 +44,10 @@ export const DevStateControls = ({
           {/* Replay Splash Screen */}
           {onReplaySplash && (
             <button
+              id="dev-replay-splash"
               type="button"
               onClick={onReplaySplash}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
               title="Replay the logo reveal splash screen animation"
             >
               <Sparkles className="w-3 h-3 text-emerald-500" />
@@ -56,9 +58,10 @@ export const DevStateControls = ({
           {/* Open Keyboard Tour */}
           {onOpenTour && (
             <button
+              id="dev-keyboard-tour"
               type="button"
               onClick={onOpenTour}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
               title="Open the keyboard-first accessibility tour"
             >
               <span className="font-mono text-xs">⌨️</span>
@@ -68,9 +71,10 @@ export const DevStateControls = ({
 
           {/* Toggle Error State */}
           <button
+            id="dev-simulate-error"
             type="button"
             onClick={onToggleError}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg border transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs ${
               isError
                 ? 'bg-rose-600 text-white border-rose-600'
                 : 'bg-white dark:bg-slate-800 text-rose-700 dark:text-rose-400 border-rose-300 dark:border-rose-900/60 hover:bg-rose-50 dark:hover:bg-rose-950/40'
@@ -83,9 +87,10 @@ export const DevStateControls = ({
 
           {/* Clear All to inspect Empty State */}
           <button
+            id="dev-trigger-empty"
             type="button"
             onClick={onClearAll}
-            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500"
+            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500"
             title="Empties habit list to test empty state"
           >
             <Trash2 className="w-3 h-3 text-slate-400" />
@@ -94,9 +99,10 @@ export const DevStateControls = ({
 
           {/* Reset to Sample JSON */}
           <button
+            id="dev-reset-data"
             type="button"
             onClick={onResetData}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus-visible:ring-2 focus-visible:ring-amber-500 shadow-xs"
             title="Reset data back to initial mock JSON"
           >
             <Sparkles className="w-3 h-3" />

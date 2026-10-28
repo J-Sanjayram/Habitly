@@ -225,6 +225,180 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
     return result;
   }, [habits, searchQuery, selectedCategory, selectedStatus, selectedFrequency, sortBy]);
 
+  // Arrow key navigation between all buttons, controls, and habit cards on Tracker Page
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only process arrow keys
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        return;
+      }
+
+      const activeEl = document.activeElement;
+      const activeTag = activeEl?.tagName;
+
+      // When focused in search input, allow text editing with left/right,
+      // but let ArrowDown exit search directly to the Add Habit button or category filters
+      if (activeTag === 'INPUT') {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const target = document.getElementById('tracker-add-habit-btn') ||
+            document.querySelector('[id^="category-tab-"]') ||
+            document.getElementById('habit-card-0');
+          if (target) {
+            target.focus();
+            target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+        return;
+      }
+
+      // Do not intercept if focus is inside textarea, select or contentEditable
+      if (activeTag === 'TEXTAREA' || activeTag === 'SELECT' || activeEl?.isContentEditable) {
+        return;
+      }
+
+      // Do not intercept if any modal dialog is currently open
+      if (
+        document.querySelector('[role="dialog"]') ||
+        document.querySelector('[aria-modal="true"]')
+      ) {
+        return;
+      }
+
+      // Helper to test if element is visible and interactive
+      const isVisible = (el) => {
+        if (!el) return false;
+        const style = window.getComputedStyle(el);
+        if (
+          style.display === 'none' ||
+          style.visibility === 'hidden' ||
+          style.opacity === '0'
+        ) {
+          return false;
+        }
+        const rect = el.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      };
+
+      // Collect all focusable controls across Header, Tracker Content, and Footer
+      const focusable = Array.from(
+        document.querySelectorAll(
+          'button:not([disabled]):not([tabindex="-1"]), a[href]:not([disabled]):not([tabindex="-1"]), article[id^="habit-card-"]'
+        )
+      ).filter(isVisible);
+
+      if (focusable.length === 0) return;
+
+      const isForward = e.key === 'ArrowRight' || e.key === 'ArrowDown';
+      const isBackward = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
+
+      const currentIndex = focusable.indexOf(activeEl);
+
+      if (currentIndex !== -1) {
+        // Fast shortcut: When focused on a habit's "Mark Done" / "Done Today" button
+        if (activeEl?.id?.startsWith('habit-toggle-')) {
+          const currentHabitId = activeEl.id.replace('habit-toggle-', '');
+          const allToggles = focusable.filter((el) => el.id?.startsWith('habit-toggle-'));
+          const toggleIndex = allToggles.indexOf(activeEl);
+
+          if (e.key === 'ArrowDown' && allToggles.length > 1) {
+            e.preventDefault();
+            const nextToggle = allToggles[(toggleIndex + 1) % allToggles.length];
+            nextToggle?.focus();
+            nextToggle?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          } else if (e.key === 'ArrowUp' && allToggles.length > 1) {
+            e.preventDefault();
+            const prevToggle = allToggles[(toggleIndex - 1 + allToggles.length) % allToggles.length];
+            prevToggle?.focus();
+            prevToggle?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const deleteBtn = document.getElementById(`habit-delete-${currentHabitId}`);
+            if (deleteBtn) {
+              deleteBtn.focus();
+              return;
+            }
+          }
+        }
+
+        // Fast shortcut: When focused on a habit's Delete button
+        if (activeEl?.id?.startsWith('habit-delete-')) {
+          const currentHabitId = activeEl.id.replace('habit-delete-', '');
+          const allDeletes = focusable.filter((el) => el.id?.startsWith('habit-delete-'));
+          const delIndex = allDeletes.indexOf(activeEl);
+
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            const toggleBtn = document.getElementById(`habit-toggle-${currentHabitId}`);
+            if (toggleBtn) {
+              toggleBtn.focus();
+              return;
+            }
+          } else if (e.key === 'ArrowDown' && allDeletes.length > 1) {
+            e.preventDefault();
+            const nextDel = allDeletes[(delIndex + 1) % allDeletes.length];
+            nextDel?.focus();
+            nextDel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          } else if (e.key === 'ArrowUp' && allDeletes.length > 1) {
+            e.preventDefault();
+            const prevDel = allDeletes[(delIndex - 1 + allDeletes.length) % allDeletes.length];
+            prevDel?.focus();
+            prevDel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          }
+        }
+
+        // Standard sequential cycling across all interactive buttons
+        e.preventDefault();
+        let nextIndex;
+        if (isForward) {
+          nextIndex = (currentIndex + 1) % focusable.length;
+        } else if (isBackward) {
+          nextIndex = (currentIndex - 1 + focusable.length) % focusable.length;
+        }
+        const nextTarget = focusable[nextIndex];
+        if (nextTarget) {
+          nextTarget.focus();
+          nextTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        // No button currently focused: focus the primary Add Habit button or first element in viewport
+        e.preventDefault();
+
+        const addHabitBtn = document.getElementById('tracker-add-habit-btn');
+        if (window.scrollY < 250 && addHabitBtn && isVisible(addHabitBtn)) {
+          addHabitBtn.focus();
+          addHabitBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return;
+        }
+
+        const viewportMid = window.innerHeight / 2;
+        let bestCandidate = focusable[0];
+        let minDiff = Infinity;
+
+        for (const el of focusable) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top >= -50 && rect.bottom <= window.innerHeight + 50) {
+            const diff = Math.abs(rect.top - viewportMid);
+            if (diff < minDiff) {
+              minDiff = diff;
+              bestCandidate = el;
+            }
+          }
+        }
+
+        bestCandidate.focus();
+        bestCandidate.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       {/* Dev & Reviewer Controls Toolbar */}
@@ -252,6 +426,17 @@ export const TrackerPage = ({ onReplaySplash, onOpenTour }) => {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Track daily rituals, build momentum, and master consistency.
           </p>
+          <div className="mt-2.5 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <span className="font-mono font-bold text-slate-700 dark:text-slate-200">← → ↑ ↓</span> Arrow keys to move between buttons &amp; cards
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <kbd className="font-mono font-bold text-slate-700 dark:text-slate-200">Space / Enter</kbd> Check off habit
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <kbd className="font-mono font-bold text-slate-700 dark:text-slate-200">Ctrl+K</kbd> Search
+            </span>
+          </div>
         </div>
       </div>
 

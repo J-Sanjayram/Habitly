@@ -22,33 +22,41 @@ export const HabitCard = ({ habit, onToggleComplete, onDelete, index = 0, totalC
   };
 
   const handleCardKeyDown = (e) => {
-    // Arrow Down / Arrow Right -> Navigate to next habit card
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-      const isTargetCard = e.target.tagName === 'ARTICLE';
-      if (isTargetCard && index < totalCount - 1) {
+    const isTargetCard = e.target.tagName === 'ARTICLE';
+
+    // Arrow Down -> Navigate to next habit card
+    if (e.key === 'ArrowDown' && isTargetCard) {
+      if (index < totalCount - 1) {
         e.preventDefault();
         document.getElementById(`habit-card-${index + 1}`)?.focus();
       }
     }
-    // Arrow Up / Arrow Left -> Navigate to previous habit card or search
-    else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-      const isTargetCard = e.target.tagName === 'ARTICLE';
-      if (isTargetCard) {
-        e.preventDefault();
-        if (index > 0) {
-          document.getElementById(`habit-card-${index - 1}`)?.focus();
-        } else {
-          document.getElementById('habit-search')?.focus();
-        }
+    // Arrow Up -> Navigate to previous habit card or Add Habit button
+    else if (e.key === 'ArrowUp' && isTargetCard) {
+      e.preventDefault();
+      if (index > 0) {
+        document.getElementById(`habit-card-${index - 1}`)?.focus();
+      } else {
+        document.getElementById('tracker-add-habit-btn')?.focus();
       }
     }
+    // Arrow Right on card -> focus into its toggle button
+    else if (e.key === 'ArrowRight' && isTargetCard) {
+      e.preventDefault();
+      document.getElementById(`habit-toggle-${habit.id}`)?.focus();
+    }
+    // Arrow Left on card -> focus into its delete button
+    else if (e.key === 'ArrowLeft' && isTargetCard) {
+      e.preventDefault();
+      document.getElementById(`habit-delete-${habit.id}`)?.focus();
+    }
     // Space or Enter on card -> Toggle complete
-    else if ((e.key === ' ' || e.key === 'Enter') && e.target.tagName === 'ARTICLE') {
+    else if ((e.key === ' ' || e.key === 'Enter') && isTargetCard) {
       e.preventDefault();
       handleToggle();
     }
     // Delete key on card -> Delete habit
-    else if (e.key === 'Delete' && e.target.tagName === 'ARTICLE') {
+    else if (e.key === 'Delete' && isTargetCard) {
       e.preventDefault();
       onDelete(habit.id);
     }
@@ -145,9 +153,10 @@ export const HabitCard = ({ habit, onToggleComplete, onDelete, index = 0, totalC
         <div className="flex items-center gap-2 w-full sm:w-auto">
           {/* Delete Button */}
           <button
+            id={`habit-delete-${habit.id}`}
             type="button"
             onClick={() => onDelete(habit.id)}
-            className="p-2.5 rounded-xl text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors focus-visible:ring-2 focus-visible:ring-rose-500"
+            className="p-2.5 rounded-xl text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500 focus-visible:ring-2 focus-visible:ring-rose-500"
             aria-label={`Delete habit: ${habit.title}`}
             title="Delete habit (with 5-second undo)"
           >
@@ -156,9 +165,10 @@ export const HabitCard = ({ habit, onToggleComplete, onDelete, index = 0, totalC
 
           {/* Mark Complete Checkbox / Button */}
           <button
+            id={`habit-toggle-${habit.id}`}
             type="button"
             onClick={handleToggle}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40 ${
               habit.completedToday
                 ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
                 : 'border-2 border-slate-300 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500 text-slate-700 dark:text-slate-200 hover:text-emerald-600'

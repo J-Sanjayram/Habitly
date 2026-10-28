@@ -101,9 +101,10 @@ export const FilterControls = ({
 
           {/* Add Habit CTA button */}
           <button
+            id="tracker-add-habit-btn"
             type="button"
             onClick={onOpenAddModal}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-sm shadow-emerald-600/30 transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] shadow-sm shadow-emerald-600/30 transition-all focus:outline-none focus:ring-4 focus:ring-emerald-500/40 focus-visible:ring-4 focus-visible:ring-emerald-500/40 shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Add Habit</span>
@@ -124,34 +125,40 @@ export const FilterControls = ({
             return (
               <button
                 key={cat}
+                id={`category-tab-${cat.toLowerCase()}`}
                 role="tab"
                 aria-selected={isSelected}
-                tabIndex={isSelected ? 0 : -1}
+                tabIndex={0}
                 onClick={() => onCategoryChange(cat)}
                 onKeyDown={(e) => {
                   if (e.key === 'ArrowRight') {
                     e.preventDefault();
                     const nextIndex = (index + 1) % categories.length;
                     onCategoryChange(categories[nextIndex]);
+                    document.getElementById(`category-tab-${categories[nextIndex].toLowerCase()}`)?.focus();
                   } else if (e.key === 'ArrowLeft') {
                     e.preventDefault();
                     const prevIndex = (index - 1 + categories.length) % categories.length;
                     onCategoryChange(categories[prevIndex]);
+                    document.getElementById(`category-tab-${categories[prevIndex].toLowerCase()}`)?.focus();
                   } else if (e.key === 'Home') {
                     e.preventDefault();
                     onCategoryChange(categories[0]);
+                    document.getElementById(`category-tab-${categories[0].toLowerCase()}`)?.focus();
                   } else if (e.key === 'End') {
                     e.preventDefault();
                     onCategoryChange(categories[categories.length - 1]);
+                    document.getElementById(`category-tab-${categories[categories.length - 1].toLowerCase()}`)?.focus();
                   } else if (e.key === 'ArrowDown') {
                     e.preventDefault();
-                    document.getElementById('habit-card-0')?.focus();
+                    const firstCard = document.getElementById('habit-card-0') || document.querySelector('[id^="status-filter-"]');
+                    firstCard?.focus();
                   } else if (e.key === 'ArrowUp') {
                     e.preventDefault();
-                    document.getElementById('habit-search')?.focus();
+                    document.getElementById('tracker-add-habit-btn')?.focus();
                   }
                 }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                   isSelected
                     ? 'bg-emerald-600 text-white shadow-xs'
                     : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
@@ -170,9 +177,10 @@ export const FilterControls = ({
             {['all', 'pending', 'completed'].map((st) => (
               <button
                 key={st}
+                id={`status-filter-${st}`}
                 type="button"
                 onClick={() => onStatusChange(st)}
-                className={`px-2.5 py-1 rounded-lg font-medium capitalize transition-all focus-visible:ring-1 focus-visible:ring-emerald-500 ${
+                className={`px-2.5 py-1 rounded-lg font-medium capitalize transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                   selectedStatus === st
                     ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-semibold'
                     : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -188,9 +196,10 @@ export const FilterControls = ({
             {['all', 'Daily', 'Weekly'].map((freq) => (
               <button
                 key={freq}
+                id={`frequency-filter-${freq.toLowerCase()}`}
                 type="button"
                 onClick={() => onFrequencyChange(freq)}
-                className={`px-2.5 py-1 rounded-lg font-medium capitalize transition-all focus-visible:ring-1 focus-visible:ring-emerald-500 ${
+                className={`px-2.5 py-1 rounded-lg font-medium capitalize transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                   selectedFrequency === freq
                     ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-semibold'
                     : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
