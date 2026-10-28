@@ -28,7 +28,7 @@ npm run preview
 | Dimension | Decision | UX / Design Justification |
 | :--- | :--- | :--- |
 | **Color Palette** | **Emerald & Teal** (`#10B981`, `#059669`) with **Amber** streaks & **Indigo** accents | In behavioral psychology, green is tied to natural growth, self-improvement, and accomplishment without triggering anxiety or high cortisol. Amber represents the warm "spark" of streak momentum, while deep slate neutrals maintain strict **WCAG 2.1 AA** contrast ratios in both light and dark modes. |
-| **Typography** | **Inter** (Geometric Sans-serif) | Chosen for its exceptional readability at small sizes, generous x-height, and neutral optical rhythm. Numbers and streak counts remain cleanly aligned across dense dashboard cards. |
+| **Typography** | **Plus Jakarta Sans** (Logo & Display) + **Inter** (Dashboard UI) | **Plus Jakarta Sans (ExtraBold 800)** provides a confident, modern startup brand identity for the logo, while **Inter** delivers exceptional legibility, generous x-height, and neutral optical rhythm across dense habit metrics and interactive controls. |
 | **Spacing & Radius** | **8pt Grid** (`rounded-xl` 12px, `rounded-2xl` 16px, `rounded-3xl` 24px) | Strict 8pt grid scale ensures proportional breathing room across screen sizes. Soft curves evoke a welcoming, human, and forgiving atmosphere rather than an intimidating, cold enterprise dashboard. |
 | **Visual Hierarchy** | **Z-Pattern Landing & F-Pattern Dashboard** | High-contrast hero headline with a single unambiguous CTA button, supported by contextual category color-coding and primary/secondary button states with distinct visual weights. |
 

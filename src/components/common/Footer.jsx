@@ -8,11 +8,13 @@ export const Footer = ({ onViewChange }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand info */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5 font-bold text-xl tracking-tight text-white">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white">
+            <div className="flex items-center gap-2.5 font-display font-extrabold text-xl tracking-tight text-white">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
                 <Sparkles className="w-4 h-4 fill-white" />
               </div>
-              <span>Habitly</span>
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-200 bg-clip-text text-transparent">
+                Habitly
+              </span>
             </div>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               Designed for intentional living. Habitly replaces guilt-driven productivity with a simple, calm, science-backed habit tracking system that helps you stay consistent.

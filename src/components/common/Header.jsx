@@ -26,13 +26,13 @@ export const Header = ({ currentView, onViewChange }) => {
         <button
           type="button"
           onClick={() => handleNavClick('landing')}
-          className="flex items-center gap-2.5 font-bold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 z-10"
+          className="flex items-center gap-2.5 font-display font-extrabold text-xl tracking-tight text-slate-900 dark:text-white rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 z-10 group"
           aria-label="Habitly home"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
             <Sparkles className="w-5 h-5 fill-white" />
           </div>
-          <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
+          <span className="font-display font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
             Habitly
           </span>
         </button>
